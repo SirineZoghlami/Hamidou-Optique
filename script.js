@@ -61,6 +61,111 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Pagination variables
+    const glassesPerPage = 6;
+    let currentPage = 1;
+    let totalPages = 1;
+    let currentGlassesData = [];
+
+    // Function to render pagination controls
+    function renderPagination() {
+        const paginationContainer = document.getElementById('pagination');
+        if (!paginationContainer) return;
+
+        paginationContainer.innerHTML = '';
+
+        // Previous button
+        const prevButton = document.createElement('button');
+        prevButton.className = `px-4 py-2 rounded-lg ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`;
+        prevButton.textContent = 'Précédent';
+        prevButton.disabled = currentPage === 1;
+        prevButton.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                displayGlasses(currentPage);
+            }
+        });
+        paginationContainer.appendChild(prevButton);
+
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.className = `px-4 py-2 rounded-lg ${currentPage === i ? 'bg-blue-600 text-white' : 'bg-white hover:bg-gray-100'}`;
+            pageButton.textContent = i;
+            pageButton.addEventListener('click', () => {
+                currentPage = i;
+                displayGlasses(currentPage);
+            });
+            paginationContainer.appendChild(pageButton);
+        }
+
+        // Next button
+        const nextButton = document.createElement('button');
+        nextButton.className = `px-4 py-2 rounded-lg ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`;
+        nextButton.textContent = 'Suivant';
+        nextButton.disabled = currentPage === totalPages;
+        nextButton.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayGlasses(currentPage);
+            }
+        });
+        paginationContainer.appendChild(nextButton);
+    }
+
+    // Function to display glasses for a specific page
+    function displayGlasses(page) {
+        const glassesGrid = document.getElementById('glasses-grid');
+        const adminGlassesGrid = document.getElementById('admin-glasses-grid');
+        const targetGrid = glassesGrid || adminGlassesGrid;
+
+        if (!targetGrid) return;
+
+        targetGrid.innerHTML = '';
+
+        const startIndex = (page - 1) * glassesPerPage;
+        const endIndex = Math.min(startIndex + glassesPerPage, currentGlassesData.length);
+
+        for (let i = startIndex; i < endIndex; i++) {
+            const glass = currentGlassesData[i];
+            const card = document.createElement('div');
+            card.className = 'glasses-card bg-white rounded-lg shadow-lg p-4';
+            card.dataset.brand = glass.brand;
+            card.innerHTML = `
+                <img src="produit/${glass.image}" alt="${glass.name}" class="w-full h-48 object-cover rounded-md mb-4">
+                <h3 class="text-lg font-semibold">${glass.name}</h3>
+                <p class="text-gray-600">Marque : ${glass.brand}</p>
+                <p class="text-gray-800 font-bold">Prix : ${glass.price} TND</p>
+                ${adminGlassesGrid ? `
+                    <button class="edit-button bg-blue-600 text-white px-4 py-2 rounded-lg mt-2 mr-2" data-id="${glass.id}" data-name="${glass.name.replace(/"/g, '&quot;')}" data-brand="${glass.brand.replace(/"/g, '&quot;')}" data-price="${glass.price}" data-image="${glass.image}" data-category="${glass.category}">Modifier</button>
+                    <button class="delete-button bg-red-600 text-white px-4 py-2 rounded-lg mt-2" data-id="${glass.id}">Supprimer</button>
+                ` : ''}
+            `;
+            targetGrid.appendChild(card);
+        }
+
+        // Add event listeners for edit and delete buttons
+        document.querySelectorAll('.edit-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.dataset.id;
+                const name = button.dataset.name;
+                const brand = button.dataset.brand;
+                const price = button.dataset.price;
+                const image = button.dataset.image;
+                const category = button.dataset.category;
+                editGlass(id, name, brand, price, image, category);
+            });
+        });
+
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', () => {
+                deleteGlass(button.dataset.id);
+            });
+        });
+
+        renderPagination();
+    }
+
     // Function to fetch and display glasses
     function loadGlasses(category = null) {
         const url = category ? `/api/glasses?category=${category}` : '/api/glasses';
@@ -77,79 +182,29 @@ document.addEventListener('DOMContentLoaded', () => {
                     showPopup('Erreur', 'Les données reçues ne sont pas valides.');
                     return;
                 }
-                const glassesGrid = document.getElementById('glasses-grid');
-                const adminGlassesGrid = document.getElementById('admin-glasses-grid');
-                const targetGrid = glassesGrid || adminGlassesGrid;
+                
+                currentGlassesData = data;
+                totalPages = Math.ceil(data.length / glassesPerPage);
+                currentPage = 1;
+                
+                displayGlasses(currentPage);
 
-                if (targetGrid) {
-                    targetGrid.innerHTML = '';
-                    data.forEach(glass => {
-                        const card = document.createElement('div');
-                        card.className = 'glasses-card bg-white rounded-lg shadow-lg p-4';
-                        card.dataset.brand = glass.brand;
-                        card.innerHTML = `
-                            <img src="produit/${glass.image}" alt="${glass.name}" class="w-full h-48 object-cover rounded-md mb-4">
-                            <h3 class="text-lg font-semibold">${glass.name}</h3>
-                            <p class="text-gray-600">Marque : ${glass.brand}</p>
-                            <p class="text-gray-800 font-bold">Prix : ${glass.price} TND</p>
-                            ${adminGlassesGrid ? `
-                                <button class="edit-button bg-blue-600 text-white px-4 py-2 rounded-lg mt-2 mr-2" data-id="${glass.id}" data-name="${glass.name.replace(/"/g, '&quot;')}" data-brand="${glass.brand.replace(/"/g, '&quot;')}" data-price="${glass.price}" data-image="${glass.image}" data-category="${glass.category}">Modifier</button>
-                                <button class="delete-button bg-red-600 text-white px-4 py-2 rounded-lg mt-2" data-id="${glass.id}">Supprimer</button>
-                            ` : ''}
-                        `;
-                        targetGrid.appendChild(card);
+                const brandFilter = document.getElementById('brand-filter');
+                if (brandFilter) {
+                    const brands = [...new Set(data.map(glass => glass.brand))];
+                    brandFilter.innerHTML = '<option value="all">Toutes</option>';
+                    brands.forEach(brand => {
+                        const option = document.createElement('option');
+                        option.value = brand;
+                        option.textContent = brand;
+                        brandFilter.appendChild(option);
                     });
-
-                    // Add event listeners for edit and delete buttons
-                    document.querySelectorAll('.edit-button').forEach(button => {
-                        button.addEventListener('click', () => {
-                            const id = button.dataset.id;
-                            const name = button.dataset.name;
-                            const brand = button.dataset.brand;
-                            const price = button.dataset.price;
-                            const image = button.dataset.image;
-                            const category = button.dataset.category;
-                            editGlass(id, name, brand, price, image, category);
-                        });
-                    });
-
-                    document.querySelectorAll('.delete-button').forEach(button => {
-                        button.addEventListener('click', () => {
-                            deleteGlass(button.dataset.id);
-                        });
-                    });
-
-                    const brandFilter = document.getElementById('brand-filter');
-                    if (brandFilter) {
-                        const brands = [...new Set(data.map(glass => glass.brand))];
-                        brandFilter.innerHTML = '<option value="all">Toutes</option>';
-                        brands.forEach(brand => {
-                            const option = document.createElement('option');
-                            option.value = brand;
-                            option.textContent = brand;
-                            brandFilter.appendChild(option);
-                        });
-                    }
                 }
             })
             .catch(error => {
                 console.error('Error fetching glasses:', error);
                 showPopup('Erreur', 'Échec du chargement des lunettes : ' + error.message);
             });
-    }
-
-    // Load glasses based on page
-    const path = window.location.pathname;
-    if (path.includes('homme.html')) {
-        loadGlasses('Homme');
-    } else if (path.includes('femme.html')) {
-        loadGlasses('Femme');
-    } else if (path.includes('enfant.html')) {
-        loadGlasses('Enfant');
-    } else if (path.includes('admin.html')) {
-        loadGlasses();
-    } else {
-        loadGlasses();
     }
 
     // Brand filter
@@ -321,5 +376,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     showPopup('Erreur', 'Échec de la suppression des lunettes : ' + error.message);
                 });
         });
+    }
+
+    // Load glasses based on page
+    const path = window.location.pathname;
+    if (path.includes('homme.html')) {
+        loadGlasses('Homme');
+    } else if (path.includes('femme.html')) {
+        loadGlasses('Femme');
+    } else if (path.includes('enfant.html')) {
+        loadGlasses('Enfant');
+    } else if (path.includes('admin.html')) {
+        loadGlasses();
+    } else {
+        loadGlasses();
     }
 });

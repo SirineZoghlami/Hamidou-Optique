@@ -1,43 +1,111 @@
-/* Navigation transitions */
+/* ========== BASE STYLES ========== */
+:root {
+  --primary: #2563eb; /* blue-600 */
+  --primary-hover: #1d4ed8; /* blue-700 */
+  --secondary: #f3f4f6; /* gray-100 */
+  --text: #1f2937; /* gray-800 */
+  --text-light: #6b7280; /* gray-500 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  scroll-behavior: smooth;
+  color: var(--text);
+}
+
+/* ========== NAVIGATION ========== */
 nav {
-    transition: all 0.3s ease;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+nav.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
 }
 
 #mobile-menu {
-    transition: all 0.3s ease;
+  transition: var(--transition);
+  max-height: 0;
+  overflow: hidden;
+}
+
+#mobile-menu.open {
+  max-height: 500px;
 }
 
 /* Compensate for fixed navigation */
 section {
-    scroll-margin-top: 80px;
+  scroll-margin-top: 80px;
 }
 
-/* Button styles: Soft rectangular shape */
-button, a.button {
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-    border-radius: 0.5rem; /* Soft edges */
+/* ========== BUTTONS ========== */
+button, 
+a.button {
+  transition: var(--transition);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
 }
 
-button:hover, a.button:hover {
-    transform: translateY(-2px);
+button:hover, 
+a.button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 
-/* Product card styles */
+button:active, 
+a.button:active {
+  transform: translateY(0);
+}
+
+/* Primary button */
+.bg-white.text-blue-600 {
+  transition: var(--transition);
+}
+
+.bg-white.text-blue-600:hover {
+  background-color: var(--primary) !important;
+  color: white !important;
+}
+
+/* ========== PRODUCT CARDS ========== */
 .glasses-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: white;
 }
 
 .glasses-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Brand filter transition */
-#brand-filter {
-    transition: all 0.3s ease;
+.glasses-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(37,99,235,0.1) 100%);
+  opacity: 0;
+  transition: var(--transition);
+  z-index: 1;
 }
 
-/* Dropdown menu styles */
+.glasses-card:hover::before {
+  opacity: 1;
+}
+
+/* ========== DROPDOWN MENUS ========== */
 .group {
     position: relative;
 }
@@ -74,43 +142,155 @@ button:hover, a.button:hover {
     background-color: #f3f4f6; /* gray-100 */
 }
 
-/* Admin form and modal styles */
+
+.group .absolute a:hover {
+  background-color: var(--secondary);
+  color: var(--primary);
+}
+
+/* ========== MODALS & FORMS ========== */
 #glasses-form input,
 #glasses-form select,
 #edit-glasses-form input,
 #edit-glasses-form select {
-    transition: all 0.3s ease;
-    border-radius: 0.5rem; /* Soft edges */
+  transition: var(--transition);
+  border-radius: 0.5rem;
 }
 
-/* Edit modal styles */
-#edit-modal {
-    transition: opacity 0.3s ease;
+#glasses-form input:focus,
+#glasses-form select:focus,
+#edit-glasses-form input:focus,
+#edit-glasses-form select:focus {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  border-color: var(--primary);
 }
 
-#edit-modal .bg-white {
-    transform: scale(0.95);
-    transition: transform 0.3s ease;
-}
-
-#edit-modal:not(.hidden) .bg-white {
-    transform: scale(1);
-}
-
-/* Custom popup styles */
+/* Modal animations */
+#edit-modal,
 #custom-popup {
-    transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
+#edit-modal .bg-white,
 #custom-popup .bg-white {
-    transform: scale(0.95);
-    transition: transform 0.3s ease;
+  transform: scale(0.95);
+  transition: var(--transition);
 }
 
+#edit-modal:not(.hidden) .bg-white,
 #custom-popup:not(.hidden) .bg-white {
-    transform: scale(1);
+  transform: scale(1);
 }
 
-#custom-popup button {
-    border-radius: 0.5rem; /* Soft edges */
+/* ========== HERO SECTION ========== */
+#home {
+  background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+#home::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  animation: pulse 15s infinite linear;
+}
+
+@keyframes pulse {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ========== SERVICES SECTION ========== */
+.service-item {
+  transition: var(--transition);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.service-item:hover {
+  background-color: white;
+  box-shadow: var(--shadow);
+  transform: translateY(-5px);
+}
+
+/* ========== PAGINATION ========== */
+#pagination button {
+  transition: var(--transition);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#pagination button:hover:not(.active) {
+  background-color: var(--secondary);
+}
+
+#pagination button.active {
+  background-color: var(--primary);
+  color: white;
+}
+/* ========== FOOTER ========== */
+footer {
+  background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+  padding: 2rem 0;
+  color: white;
+  margin-top: auto; /* This helps push footer to bottom */
+}
+
+/* Make sure the body or main container is a flex column */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer a {
+  transition: var(--transition-fast);
+  position: relative;
+  color: inherit; /* Ensures links use the footer text color */
+  text-decoration: none; /* Removes default underline */
+}
+
+footer a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: white;
+  transition: var(--transition);
+}
+
+footer a:hover::after {
+  width: 100%;
+}
+
+/* Optional: Add some spacing and styling for footer content */
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+/* ========== RESPONSIVE ADJUSTMENTS ========== */
+@media (max-width: 768px) {
+  section {
+    scroll-margin-top: 60px;
+  }
+  
+  .glasses-card:hover {
+    transform: none;
+    box-shadow: var(--shadow);
+  }
 }

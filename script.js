@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Previous button
         const prevButton = document.createElement('button');
         prevButton.className = `px-4 py-2 rounded-lg ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`;
-        prevButton.textContent = 'Précédent';
+        prevButton.textContent = '<';
         prevButton.disabled = currentPage === 1;
         prevButton.addEventListener('click', () => {
             if (currentPage > 1) {
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Next button
         const nextButton = document.createElement('button');
         nextButton.className = `px-4 py-2 rounded-lg ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`;
-        nextButton.textContent = 'Suivant';
+        nextButton.textContent = '>';
         nextButton.disabled = currentPage === totalPages;
         nextButton.addEventListener('click', () => {
             if (currentPage < totalPages) {

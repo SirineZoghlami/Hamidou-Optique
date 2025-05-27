@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opticien Hamidou Optique</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-sans bg-gray-100">
+  <!-- Navigation -->
+  <nav class="bg-white shadow-lg fixed w-full z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <h1 class="text-2xl font-bold text-blue-600">Hamidou Optique</h1>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#home" class="text-gray-700 hover:text-blue-600">Accueil</a>
+          <a href="#services" class="text-gray-700 hover:text-blue-600">Services</a>
+          <div class="relative group">
+            <a href="#products" class="text-gray-700 hover:text-blue-600">Produits</a>
+            <div class="absolute hidden bg-white shadow-lg rounded-md mt-2">
+              <a href="homme.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Homme</a>
+              <a href="femme.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Femme</a>
+              <a href="enfant.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Enfant</a>
+            </div>
+          </div>
+          <a href="#about" class="text-gray-700 hover:text-blue-600">À propos</a>
+          <a href="#contact" class="text-gray-700 hover:text-blue-600">Contact</a>
+          <a href="admin.html" class="text-gray-700 hover:text-blue-600">Admin</a>
+        </div>
+        <div class="md:hidden flex items-center">
+          <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Menu mobile -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+      <div class="px-4 pt-2 pb-3 space-y-1">
+        <a href="#home" class="block text-gray-700 hover:text-blue-600">Accueil</a>
+        <a href="#services" class="block text-gray-700 hover:text-blue-600">Services</a>
+        <a href="#products" class="block text-gray-700 hover:text-blue-600">Produits</a>
+        <a href="homme.html" class="block pl-4 text-gray-700 hover:text-blue-600">Homme</a>
+        <a href="femme.html" class="block pl-4 text-gray-700 hover:text-blue-600">Femme</a>
+        <a href="enfant.html" class="block pl-4 text-gray-700 hover:text-blue-600">Enfant</a>
+        <a href="#about" class="block text-gray-700 hover:text-blue-600">À propos</a>
+        <a href="#contact" class="block text-gray-700 hover:text-blue-600">Contact</a>
+        <a href="admin.html" class="block text-gray-700 hover:text-blue-600">Admin</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Section Héros -->
+  <section id="home" class="bg-blue-600 text-white h-screen flex items-center justify-center">
+    <div class="text-center max-w-3xl mx-auto px-4">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">Votre vision, notre passion</h2>
+      <p class="text-lg md:text-xl mb-6">Découvrez des lunettes adaptées à votre style et vos besoins avec Hamidou Optique.</p>
+      <a href="#contact" class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-200">Prendre rendez-vous</a>
+    </div>
+  </section>
+
+  <!-- Section Services -->
+  <section id="services" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Nos Services</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="text-blue-600 text-4xl mb-4">👓</div>
+          <h3 class="text-xl font-semibold mb-2">Lunettes sur mesure</h3>
+          <p class="text-gray-600">Des montures adaptées à votre style et votre confort.</p>
+        </div>
+        <div class="text-center">
+          <div class="text-blue-600 text-4xl mb-4">👀</div>
+          <h3 class="text-xl font-semibold mb-2">Examen de la vue</h3>
+          <p class="text-gray-600">Tests précis pour garantir une vision optimale.</p>
+        </div>
+        <div class="text-center">
+          <div class="text-blue-600 text-4xl mb-4">🛠</div>
+          <h3 class="text-xl font-semibold mb-2">Réparations</h3>
+          <p class="text-gray-600">Service rapide pour vos lunettes endommagées.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Produits -->
+  <section id="products" class="py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Nos Lunettes</h2>
+    
+      <div id="glasses-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <!-- Glasses will be populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Section À propos -->
+  <section id="about" class="py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">À propos de nous</h2>
+      <div class="flex flex-col items-center">
+        <div class="w-full">
+          <p class="text-gray-600 mb-4">Chez Hamidou Optique, nous mettons notre expertise au service de votre vue depuis plus de 10 ans. Notre équipe d'opticiens qualifiés vous accompagne pour trouver les solutions visuelles qui vous conviennent.</p>
+          <p class="text-gray-600">Nous travaillons avec les meilleures marques pour offrir des produits de qualité et un service personnalisé.</p>
+        </div>
+      </div>
+    </div>
+</section>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-blue-600 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Contact</h3>
+          <p>Email : contact@hamidouoptique.fr</p>
+          <p>Téléphone : 01 23 45 67 89</p>
+          <p>Adresse : 123 Rue de la Vue, 75001 Paris</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Horaires</h3>
+          <p>Lundi - Samedi : 9h - 19h</p>
+          <p>Dimanche : Fermé</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Suivez-nous</h3>
+          <p>Facebook | Instagram</p>
+        </div>
+      </div>
+      <p class="text-center mt-8">© 2025 Hamidou Optique. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

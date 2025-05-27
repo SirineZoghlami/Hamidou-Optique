@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunettes Femme - Vision Claire</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-sans bg-gray-100">
+  <!-- Navigation -->
+  <nav class="bg-white shadow-lg fixed w-full z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <h1 class="text-2xl font-bold text-blue-600">Hamidou Optique</h1>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html#home" class="text-gray-700 hover:text-blue-600">Accueil</a>
+          <a href="index.html#services" class="text-gray-700 hover:text-blue-600">Services</a>
+          <div class="relative group">
+            <a href="index.html#products" class="text-gray-700 hover:text-blue-600">Produits</a>
+            <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-md mt-2">
+              <a href="homme.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Homme</a>
+              <a href="femme.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Femme</a>
+              <a href="enfant.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Enfant</a>
+            </div>
+          </div>
+          <a href="index.html#about" class="text-gray-700 hover:text-blue-600">À propos</a>
+          <a href="index.html#contact" class="text-gray-700 hover:text-blue-600">Contact</a>
+          <a href="admin.html" class="text-gray-700 hover:text-blue-600">Admin</a>
+        </div>
+        <div class="md:hidden flex items-center">
+          <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Menu mobile -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+      <div class="px-4 pt-2 pb-3 space-y-1">
+        <a href="index.html#home" class="block text-gray-700 hover:text-blue-600">Accueil</a>
+        <a href="index.html#services" class="block text-gray-700 hover:text-blue-600">Services</a>
+        <a href="index.html#products" class="block text-gray-700 hover:text-blue-600">Produits</a>
+        <a href="homme.html" class="block pl-4 text-gray-700 hover:text-blue-600">Homme</a>
+        <a href="femme.html" class="block pl-4 text-gray-700 hover:text-blue-600">Femme</a>
+        <a href="enfant.html" class="block pl-4 text-gray-700 hover:text-blue-600">Enfant</a>
+        <a href="index.html#about" class="block text-gray-700 hover:text-blue-600">À propos</a>
+        <a href="index.html#contact" class="block text-gray-700 hover:text-blue-600">Contact</a>
+        <a href="admin.html" class="block text-gray-700 hover:text-blue-600">Admin</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Section Produits Femme -->
+  <section id="products" class="py-16 bg-gray-100 pt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Lunettes pour Femme</h2>
+      
+      <div id="glasses-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <!-- Glasses will be populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-blue-600 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Contact</h3>
+          <p>Email : contact@visionclaire.fr</p>
+          <p>Téléphone : 01 23 45 67 89</p>
+          <p>Adresse : 123 Rue de la Vue, 75001 Paris</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Horaires</h3>
+          <p>Lundi - Samedi : 9h - 19h</p>
+          <p>Dimanche : Fermé</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Suivez-nous</h3>
+          <p>Facebook | Instagram</p>
+        </div>
+      </div>
+      <p class="text-center mt-8">© 2025 Vision Claire. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

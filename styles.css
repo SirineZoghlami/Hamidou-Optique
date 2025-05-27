@@ -1,0 +1,116 @@
+/* Navigation transitions */
+nav {
+    transition: all 0.3s ease;
+}
+
+#mobile-menu {
+    transition: all 0.3s ease;
+}
+
+/* Compensate for fixed navigation */
+section {
+    scroll-margin-top: 80px;
+}
+
+/* Button styles: Soft rectangular shape */
+button, a.button {
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    border-radius: 0.5rem; /* Soft edges */
+}
+
+button:hover, a.button:hover {
+    transform: translateY(-2px);
+}
+
+/* Product card styles */
+.glasses-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glasses-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Brand filter transition */
+#brand-filter {
+    transition: all 0.3s ease;
+}
+
+/* Dropdown menu styles */
+.group {
+    position: relative;
+}
+
+.group .absolute {
+    display: none;
+    z-index: 20;
+    min-width: 160px;
+    background-color: white;
+    border-radius: 0.5rem; /* Soft edges */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    top: 100%;
+    left: 0;
+    margin-top: 0;
+}
+
+.group:hover .absolute {
+    display: block;
+}
+
+.group > a {
+    padding-bottom: 8px;
+}
+
+.group .absolute a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #4b5563; /* gray-700 */
+    text-decoration: none;
+    border-radius: 0.5rem; /* Soft edges for dropdown items */
+}
+
+.group .absolute a:hover {
+    background-color: #f3f4f6; /* gray-100 */
+}
+
+/* Admin form and modal styles */
+#glasses-form input,
+#glasses-form select,
+#edit-glasses-form input,
+#edit-glasses-form select {
+    transition: all 0.3s ease;
+    border-radius: 0.5rem; /* Soft edges */
+}
+
+/* Edit modal styles */
+#edit-modal {
+    transition: opacity 0.3s ease;
+}
+
+#edit-modal .bg-white {
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+#edit-modal:not(.hidden) .bg-white {
+    transform: scale(1);
+}
+
+/* Custom popup styles */
+#custom-popup {
+    transition: opacity 0.3s ease;
+}
+
+#custom-popup .bg-white {
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+#custom-popup:not(.hidden) .bg-white {
+    transform: scale(1);
+}
+
+#custom-popup button {
+    border-radius: 0.5rem; /* Soft edges */
+}
